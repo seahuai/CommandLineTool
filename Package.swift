@@ -3,5 +3,9 @@
 import PackageDescription
 
 let package = Package(
-    name: "CommandLineTool"
+    name: "CommandLineTool",
+    dependencies: [
+        .Package(url: "https://github.com/jatoben/CommandLine", "3.0.0-pre1" )
+    ]
+    
 )
