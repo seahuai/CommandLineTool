@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_19"
+               BlueprintIdentifier = "OBJ_32"
                BuildableName = "CommandLineKit.framework"
                BlueprintName = "CommandLineKit"
                ReferencedContainer = "container:CommandLineTool.xcodeproj">
@@ -28,7 +28,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_28"
+               BlueprintIdentifier = "OBJ_41"
+               BuildableName = "Rainbow.framework"
+               BlueprintName = "Rainbow"
+               ReferencedContainer = "container:CommandLineTool.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_58"
                BuildableName = "CommandLineTool"
                BlueprintName = "CommandLineTool"
                ReferencedContainer = "container:CommandLineTool.xcodeproj">
@@ -59,7 +73,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_19"
+            BlueprintIdentifier = "OBJ_32"
             BuildableName = "CommandLineKit.framework"
             BlueprintName = "CommandLineKit"
             ReferencedContainer = "container:CommandLineTool.xcodeproj">
