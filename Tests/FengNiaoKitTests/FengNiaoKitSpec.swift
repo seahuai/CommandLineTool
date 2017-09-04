@@ -35,13 +35,23 @@ public func specFengNiaoKit() {
             }
         }
         
-        $0.describe("String Searchers") {
+        $0.describe("String Searcher") {
             $0.it("Swift Searcher works") {
                 let s1 = "UIImage(named: \"my_image\")"
-                let s2 = "\"asda jasd shd\""
-                let s3 = "let name = \"butto@3x.jpg\""
-            }
-        }
+                let s2 = "fasd asdhjdgf kjasd \"asd s\""
+                let s3 = "let name = \"abc@2x.png\"/nlet image = UIImage(named: name)"
+                
+                let searcher = SwiftSearcher(extensions: ["png"])
+                let result = [s1,s2,s3].map{ searcher.search(in: $0) }
+                
+                try expect(result[0]) == Set(["my_image"])
+                try expect(result[1]) == Set(["asd s"])
+                try expect(result[2]) == Set(["abc"])
+                
+            }}
+        
+        
+        
     }
     
     

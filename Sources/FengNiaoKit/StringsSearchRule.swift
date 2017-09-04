@@ -43,17 +43,17 @@ extension RegexStringsSearcher{
 
 struct SwiftSearcher: RegexStringsSearcher {
     var extensions: [String]
-    var patterns: [String] = ["\"(.+?)\""]
+    let patterns: [String] = ["\"(.+?)\""]
 }
 
 struct ObjcSearcher: RegexStringsSearcher {
     var extensions: [String]
-    var patterns: [String] = ["@\"(.+?)\"", "\"(.+?)\""]
+    let patterns: [String] = ["@\"(.+?)\"", "\"(.+?)\""]
 }
 
 struct XibSearcher: RegexStringsSearcher {
     var extensions: [String]
-    var patterns: [String] = ["image name=\"(.+?)\""]
+    let patterns: [String] = ["image name=\"(.+?)\""]
 }
 
 struct GeneralSearcher: RegexStringsSearcher {
