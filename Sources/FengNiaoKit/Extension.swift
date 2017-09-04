@@ -16,7 +16,7 @@ extension String{
     }
     
     var plainName: String{
-        let p = Path(self)
+        let p = Path(self.lowercased())
         var result = p.lastComponentWithoutExtension
         if result.hasSuffix("@2x") || result.hasSuffix("@3x"){
             result = String(describing: result.utf16.dropLast(3))
