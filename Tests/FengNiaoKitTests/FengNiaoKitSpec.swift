@@ -1,8 +1,11 @@
 import Foundation
 import Spectre
 @testable import FengNiaoKit
+import PathKit
 
 public func specFengNiaoKit() {
+    
+    let fixturePath = Path(#file).parent().parent() + "Fixtures"
     
     // 创建测试上下文
     describe("FengNiaoKit") {
@@ -50,8 +53,25 @@ public func specFengNiaoKit() {
                 
             }}
         
+    }
+    
+    
+    describe("FilePathProcess") {
+        $0.it("should get correct files' path") {
+            let projectPath = fixturePath + "FindProcess"
+            let process = FilePathProcess(path: projectPath.string, extensions: ["swift"], excluded: [])
+            let result = process?.excute()
+            let expected = Set(["Folder1/ignore_ext.swift"].map { (projectPath + $0).string })
+            try expect(result) == expected
+        }
         
-        
+        $0.it("should get correct files' path with excluded path") {
+            let projectPath = fixturePath + "FindProcess"
+            let process = FilePathProcess(path: projectPath.string, extensions: ["png", "jpg"], excluded: ["Folder1/Ignore"])
+            let result = process?.excute()
+            let expected = Set(["file1.png", "Folder1/file2.png", "Folder1/SubFolder/file3.jpg", "Folder2/file4.jpg", "Folder2/ignore_file.jpg"].map { (projectPath + $0).string })
+            try expect(result) == expected
+        }
     }
     
     

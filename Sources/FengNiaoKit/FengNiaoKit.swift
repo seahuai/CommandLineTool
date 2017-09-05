@@ -55,8 +55,8 @@ public struct FengNiao{
         fatalError()
     }
     
-    func stringsInUse() -> [String]{
-        fatalError()
+    func stringsInUse() -> Set<String>{
+        return stringsInUse(at: projectPath)
     }
     
     func stringsInUse(at path: Path) -> Set<String>{
