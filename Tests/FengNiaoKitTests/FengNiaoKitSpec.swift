@@ -74,6 +74,54 @@ public func specFengNiaoKit() {
         }
     }
     
+    describe("FengNiaoKit"){
+        
+        $0.describe("FengNiao Resource Searcher") {
+            $0.it("should search resources in a simeple project") {
+                let project = fixturePath + "SimpleResource"
+                let fengniao = FengNiao(projectPath: project.string,
+                                        excludePaths: [],
+                                        resourceExtensions: ["png", "jpg", "imageset"],
+                                        fileExtensions: [])
+                let result = fengniao.resourcesInUse()
+                let expected: [String: Set<String>] = [
+                    "file1": [(project + "file1.png").string],
+                    "file2": [(project + "file2.jpg").string],
+                    "images": [(project + "images.imageset").string]
+                ]
+                try expect(result) == expected
+            }
+            
+            $0.it("should properly skip resource in bundle") {
+                let project = fixturePath + "ResourcesInBundle"
+                let fengniao = FengNiao(projectPath: project.string,
+                                        excludePaths: ["Ignore"],
+                                        resourceExtensions: ["png", "jpg", "imageset"],
+                                        fileExtensions: [])
+                let result = fengniao.resourcesInUse()
+                let expected: [String: Set<String>] = [
+                    "normal": [(project + "normal.png").string],
+                    "image": [(project + "Assets.xcassets/image.imageset").string]
+                ]
+                try expect(result) == expected
+            }
+            
+            $0.it("should not skip same files with difference scale suffix") {
+                let project = fixturePath + "ResourcesSuffix"
+                let fengniao = FengNiao(projectPath: project.string,
+                                        excludePaths: [],
+                                        resourceExtensions: ["png"],
+                                        fileExtensions: [])
+                let result = fengniao.resourcesInUse()
+                let expected: [String: Set<String>] = [
+                    "image": [(project + "image@2x.png").string, (project + "image@3x.png").string],
+                    "cloud": [(project + "cloud.png").string]
+                ]
+                try expect(result) == expected
+            }
+        }
+        
+    }
     
     
 }

@@ -92,8 +92,43 @@ public struct FengNiao{
         
     }
     
-    func resourcesInUse() -> [String: String]{
-        fatalError()
+    func resourcesInUse() -> [String: Set<String>]{
+        let find = FilePathProcess(path: projectPath, extensions: resourceExtensions, excluded: excludePaths)
+        guard let result = find?.excute() else {
+            print("Resource finding failed".red)
+            return [:]
+        }
+        
+        var files = [String: Set<String>]()
+        
+        let regularDirExtensions = ["imageset", "launchimage", "appiconset", "bundle"]
+        var nonDirExtensions: [String] {
+            return resourceExtensions.filter { !regularDirExtensions.contains($0) }
+        }
+        
+        loop: for file in result{
+            //跳过资源文件夹中文件 因为资源文件夹的名字就是资源文件的名字
+            let dirPaths = regularDirExtensions.map { ".\($0)/" }
+            for dir in dirPaths where file.contains(dir){
+                continue loop
+            }
+            
+            //跳过后缀名不正常的文件夹 eg: folder.png
+            let filePath = Path(file)
+            if let ext = filePath.extension, filePath.isDirectory && nonDirExtensions.contains(ext){
+                continue
+            }
+            
+            let key = file.plainName(resourceExtensions)
+            if let existing = files[key]{
+                files[key] = existing.union([file])
+            }else{
+                files[key] = [file]
+            }
+        }
+        
+        return files
+        
     }
     
     public func delete(){
